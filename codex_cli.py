@@ -68,10 +68,13 @@ def chat(user_message: str) -> str:
 def read_file(filepath: str) -> str:
     """Read a file and return its contents."""
     try:
-        with open(filepath, 'r') as f:
+        with open(filepath, 'r', encoding='utf-8') as f:
             return f.read()
+    except UnicodeDecodeError:
+        return f"Error reading file: File is not UTF-8 encoded"
     except Exception as e:
         return f"Error reading file: {e}"
+
 
 
 def interactive_mode():
